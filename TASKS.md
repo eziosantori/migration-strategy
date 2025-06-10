@@ -29,7 +29,7 @@
 - [x] Configure local build
 - [x] Create build script
 - [x] Configure test execution
-- [] Setup basic continuous integration
+- [x] Setup basic continuous integration
 - **Acceptance Test**: Working automatic build
 - **Planning Reference**: Section "Deployment and Build"
 
@@ -43,34 +43,34 @@
 
 #### Task 2.1.1: Product Model (TDD)
 
-- [ ] **RED**: Write test for Product.getName()
-- [ ] **GREEN**: Implement minimal Product class
-- [ ] **REFACTOR**: Optimize implementation
-- [ ] **RED**: Test for validation (non-empty name)
-- [ ] **GREEN**: Add validation
-- [ ] **REFACTOR**: Code cleanup
+- [x] **RED**: Write test for Product.getName()
+- [x] **GREEN**: Implement minimal Product class
+- [x] **REFACTOR**: Optimize implementation
+- [x] **RED**: Test for validation (non-empty name)
+- [x] **GREEN**: Add validation
+- [x] **REFACTOR**: Code cleanup
 - **Acceptance Test**: Product with working getName() and validation
 - **Planning Reference**: Section "Business Logic"
 
 #### Task 2.1.2: Category Model (TDD)
 
-- [ ] **RED**: Test for Category.getName()
-- [ ] **GREEN**: Implement Category class
-- [ ] **REFACTOR**: Optimizations
-- [ ] **RED**: Test for validation
-- [ ] **GREEN**: Implement validation
-- [ ] **REFACTOR**: Code cleanup
+- [x] **RED**: Test for Category.getName()
+- [x] **GREEN**: Implement Category class
+- [x] **REFACTOR**: Optimizations
+- [x] **RED**: Test for validation
+- [x] **GREEN**: Implement validation
+- [x] **REFACTOR**: Code cleanup
 - **Acceptance Test**: Working Category with validation
 - **Planning Reference**: Section "Business Logic"
 
 #### Task 2.1.3: Group Model (TDD)
 
-- [ ] **RED**: Test for Group.getName()
-- [ ] **GREEN**: Implement Group class
-- [ ] **REFACTOR**: Optimizations
-- [ ] **RED**: Test for validation
-- [ ] **GREEN**: Implement validation
-- [ ] **REFACTOR**: Final cleanup
+- [x] **RED**: Test for Group.getName()
+- [x] **GREEN**: Implement Group class
+- [x] **REFACTOR**: Optimizations
+- [x] **RED**: Test for validation
+- [x] **GREEN**: Implement validation
+- [x] **REFACTOR**: Final cleanup
 - **Acceptance Test**: Working Group with validation
 - **Planning Reference**: Section "Business Logic"
 
