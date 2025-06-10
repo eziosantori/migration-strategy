@@ -26,10 +26,10 @@
 
 #### Task 1.1.3: Setup Build Pipeline
 
-- [ ] Configure local build
-- [ ] Create build script
-- [ ] Configure test execution
-- [ ] Setup basic continuous integration
+- [x] Configure local build
+- [x] Create build script
+- [x] Configure test execution
+- [] Setup basic continuous integration
 - **Acceptance Test**: Working automatic build
 - **Planning Reference**: Section "Deployment and Build"
 
