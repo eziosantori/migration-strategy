@@ -1,10 +1,26 @@
-namespace MigrationStrategy.Tests;
+using Xunit;
 
-public class UnitTest1
+namespace MigrationStrategy.Tests.Unit
 {
-    [Fact]
-    public void Test1()
+    public class DummyTest
     {
+        [Fact]
+        public void DummyTest_ShouldPass()
+        {
+            Assert.True(true);
+        }
+    }
+}
 
+namespace MigrationStrategy.Tests
+{
+
+    public class UnitTest1
+    {
+        [Fact]
+        public void Test1()
+        {
+
+        }
     }
 }

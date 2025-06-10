@@ -17,10 +17,10 @@
 
 #### Task 1.1.2: Setup Testing Framework
 
-- [] Configure xUnit
-- [] Configure Moq for mocking
-- [] Configure code coverage
-- [] Create first dummy test
+- [x] Configure xUnit
+- [x] Configure Moq for mocking
+- [x] Configure code coverage
+- [x] Create first dummy test
 - **Acceptance Test**: Test run with coverage report
 - **Planning Reference**: Section "Testing Strategy"
 
