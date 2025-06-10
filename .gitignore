@@ -1,0 +1,14 @@
+bin/
+obj/
+*.user
+*.suo
+.vs/
+TestResults/
+*.log
+*.DS_Store
+*.swp
+*.userprefs
+*.ncrunch*
+_ReSharper*/
+.idea/
+.vscode/
