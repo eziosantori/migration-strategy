@@ -89,45 +89,170 @@ namespace MigrationStrategy.Core.Persistence
             // Create bidirectional relationship
             _productCategories[productName].Add(categoryName);
             _categoryProducts[categoryName].Add(productName);
-        }
-
-        /// <summary>
-        /// Removes a product from a category, breaking the relationship between them.
-        /// </summary>
-        /// <param name="product">The product to remove.</param>
-        /// <param name="category">The category from which the product should be removed.</param>
+        }        /// <summary>
+                 /// Removes a product from a category, breaking the relationship between them.
+                 /// </summary>
+                 /// <param name="product">The product to remove.</param>
+                 /// <param name="category">The category from which the product should be removed.</param>
         public void RemoveProductFromCategory(Product product, Category category)
         {
-            throw new NotImplementedException();
-        }
+            string productName = product.GetName();
+            string categoryName = category.GetName();
 
-        /// <summary>
-        /// Updates a product's name.
-        /// </summary>
-        /// <param name="product">The product to update.</param>
-        /// <param name="newName">The new name for the product.</param>
+            // Remove the relationship if it exists
+            if (_productCategories.ContainsKey(productName))
+            {
+                _productCategories[productName].Remove(categoryName);
+            }
+
+            if (_categoryProducts.ContainsKey(categoryName))
+            {
+                _categoryProducts[categoryName].Remove(productName);
+            }
+        }        /// <summary>
+                 /// Updates a product's name.
+                 /// </summary>
+                 /// <param name="product">The product to update.</param>
+                 /// <param name="newName">The new name for the product.</param>
         public void UpdateProduct(Product product, string newName)
         {
-            throw new NotImplementedException();
-        }
+            string oldName = product.GetName();
 
-        /// <summary>
-        /// Updates a category's name.
-        /// </summary>
-        /// <param name="category">The category to update.</param>
-        /// <param name="newName">The new name for the category.</param>
+            if (oldName == newName)
+            {
+                return; // No change needed
+            }
+
+            if (_products.ContainsKey(newName))
+            {
+                throw new InvalidOperationException($"A product with name '{newName}' already exists.");
+            }
+
+            // Update the product reference in the dictionary
+            _products.Remove(oldName);
+
+            // Using reflection to change the name directly on the existing product object
+            typeof(Product).GetField("_name", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(product, newName);
+
+            _products[newName] = product;
+
+            // Update group association if exists
+            if (_productGroups.ContainsKey(oldName))
+            {
+                string groupName = _productGroups[oldName];
+                _productGroups.Remove(oldName);
+                _productGroups[newName] = groupName;
+            }
+
+            // Update category associations if exist
+            if (_productCategories.ContainsKey(oldName))
+            {
+                // Store the categories this product belongs to
+                var categories = new HashSet<string>(_productCategories[oldName]);
+                _productCategories.Remove(oldName);
+                _productCategories[newName] = new HashSet<string>(categories);
+
+                // Update the reverse relations in categoryProducts
+                foreach (var categoryName in categories)
+                {
+                    if (_categoryProducts.ContainsKey(categoryName))
+                    {
+                        _categoryProducts[categoryName].Remove(oldName);
+                        _categoryProducts[categoryName].Add(newName);
+                    }
+                }
+            }
+        }        /// <summary>
+                 /// Updates a category's name.
+                 /// </summary>
+                 /// <param name="category">The category to update.</param>
+                 /// <param name="newName">The new name for the category.</param>
         public void UpdateCategory(Category category, string newName)
         {
-            throw new NotImplementedException();
-        }
+            string oldName = category.GetName();
 
-        /// <summary>
-        /// Deletes a product from the system.
-        /// </summary>
-        /// <param name="product">The product to delete.</param>
+            if (oldName == newName)
+            {
+                return; // No change needed
+            }
+
+            if (_categories.ContainsKey(newName))
+            {
+                throw new InvalidOperationException($"A category with name '{newName}' already exists.");
+            }
+
+            // Update the category reference in the dictionary
+            _categories.Remove(oldName);
+
+            // Using reflection to change the name directly on the existing category object
+            typeof(Category).GetField("_name", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(category, newName);
+
+            _categories[newName] = category;
+
+            // Update group association if exists
+            if (_categoryGroups.ContainsKey(oldName))
+            {
+                string groupName = _categoryGroups[oldName];
+                _categoryGroups.Remove(oldName);
+                _categoryGroups[newName] = groupName;
+            }
+
+            // Update product associations if exist
+            if (_categoryProducts.ContainsKey(oldName))
+            {
+                // Store the products in this category
+                var products = new HashSet<string>(_categoryProducts[oldName]);
+                _categoryProducts.Remove(oldName);
+                _categoryProducts[newName] = new HashSet<string>(products);
+
+                // Update the reverse relations in productCategories
+                foreach (var productName in products)
+                {
+                    if (_productCategories.ContainsKey(productName))
+                    {
+                        _productCategories[productName].Remove(oldName);
+                        _productCategories[productName].Add(newName);
+                    }
+                }
+            }
+        }        /// <summary>
+                 /// Deletes a product from the system.
+                 /// </summary>
+                 /// <param name="product">The product to delete.</param>
         public void DeleteProduct(Product product)
         {
-            throw new NotImplementedException();
+            string productName = product.GetName();
+
+            // Remove from products dictionary
+            if (_products.ContainsKey(productName))
+            {
+                _products.Remove(productName);
+            }
+
+            // Remove from group association
+            if (_productGroups.ContainsKey(productName))
+            {
+                _productGroups.Remove(productName);
+            }
+
+            // Remove all category associations
+            if (_productCategories.ContainsKey(productName))
+            {
+                // Get all the categories this product belongs to
+                var categories = new HashSet<string>(_productCategories[productName]);
+
+                // Remove product from all its categories
+                foreach (var categoryName in categories)
+                {
+                    if (_categoryProducts.ContainsKey(categoryName))
+                    {
+                        _categoryProducts[categoryName].Remove(productName);
+                    }
+                }
+
+                // Remove the product's category associations
+                _productCategories.Remove(productName);
+            }
         }
 
         /// <summary>
@@ -136,7 +261,38 @@ namespace MigrationStrategy.Core.Persistence
         /// <param name="category">The category to delete.</param>
         public void DeleteCategory(Category category)
         {
-            throw new NotImplementedException();
+            string categoryName = category.GetName();
+
+            // Remove from categories dictionary
+            if (_categories.ContainsKey(categoryName))
+            {
+                _categories.Remove(categoryName);
+            }
+
+            // Remove from group association
+            if (_categoryGroups.ContainsKey(categoryName))
+            {
+                _categoryGroups.Remove(categoryName);
+            }
+
+            // Remove all product associations
+            if (_categoryProducts.ContainsKey(categoryName))
+            {
+                // Get all products in this category
+                var products = new HashSet<string>(_categoryProducts[categoryName]);
+
+                // Remove category from all its products
+                foreach (var productName in products)
+                {
+                    if (_productCategories.ContainsKey(productName))
+                    {
+                        _productCategories[productName].Remove(categoryName);
+                    }
+                }
+
+                // Remove the category's product associations
+                _categoryProducts.Remove(categoryName);
+            }
         }
 
         /// <summary>

@@ -134,11 +134,11 @@
 
 #### Task 4.1.3: Complete Mock Methods (TDD)
 
-- [ ] **RED**: Test for all remaining methods
-- [ ] **GREEN**: Implement missing methods
-- [ ] **RED**: Test for edge cases
-- [ ] **GREEN**: Handle edge cases
-- [ ] **REFACTOR**: Final cleanup
+- [x] **RED**: Test for all remaining methods
+- [x] **GREEN**: Implement missing methods
+- [x] **RED**: Test for edge cases
+- [x] **GREEN**: Handle edge cases
+- [x] **REFACTOR**: Final cleanup
 - **Acceptance Test**: Complete mock with all methods
 - **Planning Reference**: Section "Test Data Management"
 
