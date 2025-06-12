@@ -84,21 +84,21 @@
 
 #### Task 3.1.1: MigrationType Enum (TDD)
 
-- [ ] **RED**: Test for all enum values
-- [ ] **GREEN**: Implement MigrationType enum
-- [ ] **RED**: Test for string/enum conversions
-- [ ] **GREEN**: Implement utility methods
-- [ ] **REFACTOR**: Optimizations
+- [x] **RED**: Test for all enum values
+- [x] **GREEN**: Implement MigrationType enum
+- [x] **RED**: Test for string/enum conversions
+- [x] **GREEN**: Implement utility methods
+- [x] **REFACTOR**: Optimizations
 - **Acceptance Test**: Enum with all values and conversions
 - **Planning Reference**: Section "Migration Types Implementation"
 
 #### Task 3.1.2: Custom Exceptions (TDD)
 
-- [ ] **RED**: Test for MigrationException
-- [ ] **GREEN**: Implement MigrationException
-- [ ] **RED**: Test for DuplicateNameException
-- [ ] **GREEN**: Implement DuplicateNameException
-- [ ] **REFACTOR**: Hierarchy cleanup
+- [x] **RED**: Test for MigrationException
+- [x] **GREEN**: Implement MigrationException
+- [x] **RED**: Test for DuplicateNameException
+- [x] **GREEN**: Implement DuplicateNameException
+- [x] **REFACTOR**: Hierarchy cleanup
 - **Acceptance Test**: Working custom exceptions
 - **Planning Reference**: Section "Error Handling"
 
