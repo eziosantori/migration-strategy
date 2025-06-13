@@ -130,10 +130,7 @@ namespace MigrationStrategy.Core.Persistence
 
             // Update the product reference in the dictionary
             _products.Remove(oldName);
-
-            // Using reflection to change the name directly on the existing product object
-            typeof(Product).GetField("_name", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(product, newName);
-
+            product.SetName(newName);
             _products[newName] = product;
 
             // Update group association if exists
@@ -183,10 +180,7 @@ namespace MigrationStrategy.Core.Persistence
 
             // Update the category reference in the dictionary
             _categories.Remove(oldName);
-
-            // Using reflection to change the name directly on the existing category object
-            typeof(Category).GetField("_name", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(category, newName);
-
+            category.SetName(newName);
             _categories[newName] = category;
 
             // Update group association if exists

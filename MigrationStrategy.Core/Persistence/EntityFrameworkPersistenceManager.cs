@@ -186,7 +186,7 @@ namespace MigrationStrategy.Core.Persistence
             _context.SaveChanges();
 
             // Update the domain model
-            typeof(Product).GetField("_name", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(product, newName);
+            product.SetName(newName);
         }
 
         /// <summary>
@@ -220,7 +220,7 @@ namespace MigrationStrategy.Core.Persistence
             _context.SaveChanges();
 
             // Update the domain model
-            typeof(Category).GetField("_name", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(category, newName);
+            category.SetName(newName);
         }
 
         /// <summary>
