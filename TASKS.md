@@ -162,10 +162,10 @@
 
 #### Task 5.1.2: COPY_SINGLE Implementation (TDD)
 
-- [ ] **RED**: Test for copy single product
-- [ ] **GREEN**: Implement copy product logic
-- [ ] **RED**: Test for copy single category
-- [ ] **GREEN**: Implement copy category logic
+- [x] **RED**: Test for copy single product
+- [x] **GREEN**: Implement copy product logic
+- [x] **RED**: Test for copy single category
+- [x] **GREEN**: Implement copy category logic
 - [ ] **RED**: Test for naming conflicts
 - [ ] **GREEN**: Implement "-copy" suffix logic
 - [ ] **REFACTOR**: Remove code duplication

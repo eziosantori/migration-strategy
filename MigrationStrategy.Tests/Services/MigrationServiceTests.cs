@@ -85,6 +85,37 @@ namespace MigrationStrategy.Tests.Services
             // Assert - no exception means the test passes
         }
 
+        [Fact]
+        public void Migrate_COPY_SINGLE_ShouldCopyProductWithCopySuffixIfConflict()
+        {
+            // Arrange
+            var product = new Product("TestProduct");
+            var group = new Group("TestGroup");
+            _mockPersistenceManager.Setup(pm => pm.CreateProduct("TestProduct", group)).Throws(new InvalidOperationException());
+            _mockPersistenceManager.Setup(pm => pm.CreateProduct("TestProduct-copy", group)).Returns(new Product("TestProduct-copy"));
+
+            // Act
+            _migrationService.Migrate(product, group, MigrationType.COPY_SINGLE);
+
+            // Assert
+            _mockPersistenceManager.Verify(pm => pm.CreateProduct("TestProduct-copy", group), Times.Once);
+        }
+
+        [Fact]
+        public void Migrate_COPY_SINGLE_ShouldCopyCategoryWithCopySuffixIfConflict()
+        {
+            // Arrange
+            var category = new Category("TestCategory");
+            var group = new Group("TestGroup");
+            _mockPersistenceManager.Setup(pm => pm.CreateCategory("TestCategory", group)).Throws(new InvalidOperationException());
+            _mockPersistenceManager.Setup(pm => pm.CreateCategory("TestCategory-copy", group)).Returns(new Category("TestCategory-copy"));
+
+            // Act
+            _migrationService.Migrate(category, group, MigrationType.COPY_SINGLE);
+
+            // Assert
+            _mockPersistenceManager.Verify(pm => pm.CreateCategory("TestCategory-copy", group), Times.Once);
+        }
 
     }
 }

@@ -46,8 +46,47 @@ namespace MigrationStrategy.Core.Services
                 throw new ArgumentException($"Object to migrate must be either a Product or a Category, but was {objectToMigrate.GetType().Name}");
             }
 
-            // Stub implementation - will be expanded in subsequent tasks
-            // This is just enough code to pass the current tests
+            if (migrationType == MigrationType.COPY_SINGLE)
+            {
+                if (objectToMigrate is Product product)
+                {
+                    string baseName = product.GetName();
+                    string newName = baseName;
+                    int attempt = 0;
+                    while (true)
+                    {
+                        try
+                        {
+                            _persistenceManager.CreateProduct(newName, targetGroup);
+                            break;
+                        }
+                        catch (InvalidOperationException)
+                        {
+                            attempt++;
+                            newName = attempt == 1 ? $"{baseName}-copy" : $"{baseName}-copy{attempt}";
+                        }
+                    }
+                }
+                else if (objectToMigrate is Category category)
+                {
+                    string baseName = category.GetName();
+                    string newName = baseName;
+                    int attempt = 0;
+                    while (true)
+                    {
+                        try
+                        {
+                            _persistenceManager.CreateCategory(newName, targetGroup);
+                            break;
+                        }
+                        catch (InvalidOperationException)
+                        {
+                            attempt++;
+                            newName = attempt == 1 ? $"{baseName}-copy" : $"{baseName}-copy{attempt}";
+                        }
+                    }
+                }
+            }
         }
     }
 }
