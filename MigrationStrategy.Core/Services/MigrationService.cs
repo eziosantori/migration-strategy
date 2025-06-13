@@ -29,7 +29,7 @@ namespace MigrationStrategy.Core.Services
         /// <param name="migrationType">The type of migration to perform.</param>
         /// <exception cref="ArgumentNullException">Thrown if objectToMigrate or targetGroup is null.</exception>
         /// <exception cref="ArgumentException">Thrown if objectToMigrate is not a Product or Category.</exception>
-        public void Migrate(object objectToMigrate, Group targetGroup, MigrationType migrationType)
+        public void Migrate(IMoveItem objectToMigrate, Group targetGroup, MigrationType migrationType)
         {
             if (objectToMigrate == null)
             {

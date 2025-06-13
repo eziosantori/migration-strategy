@@ -37,7 +37,7 @@ namespace MigrationStrategy.Tests.Services
         public void Migrate_ShouldRequireNonNullObject()
         {
             // Arrange
-            object migrationObject = null;
+            IMoveItem migrationObject = null;
             var group = new Group("TestGroup");
 
             // Act & Assert
@@ -85,16 +85,6 @@ namespace MigrationStrategy.Tests.Services
             // Assert - no exception means the test passes
         }
 
-        [Fact]
-        public void Migrate_ShouldRejectInvalidObjectTypes()
-        {
-            // Arrange
-            var invalidObject = "This is a string, not a Product or Category";
-            var group = new Group("TestGroup");
 
-            // Act & Assert
-            Assert.Throws<ArgumentException>(() =>
-                _migrationService.Migrate(invalidObject, group, MigrationType.COPY_SINGLE));
-        }
     }
 }
